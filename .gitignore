@@ -2,3 +2,5 @@ node_modules/
 windowsresources/
 venv/
 .DS_Store
+
+out/

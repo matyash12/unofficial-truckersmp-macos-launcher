@@ -22,6 +22,13 @@ const ets2_path = winePrefix + "/drive_c/Program Files (x86)/Steam/steamapps/com
 
 import { download, CancelError } from 'electron-dl';
 
+const path = require('path');
+
+//add extra path
+const extraPath = path.join(__dirname, 'extra', 'bin');
+process.env.PATH = `${extraPath}:${process.env.PATH}`;
+
+
 
 const createWindow = () => {
     const win = new BrowserWindow({

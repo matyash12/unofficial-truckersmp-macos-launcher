@@ -1,32 +1,38 @@
 {
-
   "name": "my-electron-app",
-
   "version": "1.0.0",
   "type": "module",
   "description": "Hello World!",
-
   "main": "main.js",
-
   "author": "Matyáš Hájek",
-
   "devDependencies": {
-
-    "electron": "^31.1.0"
-
+    "@electron-forge/maker-dmg": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "electron-prebuilt-compile": "31.1.0"
   },
-
   "scripts": {
-
-    "start": "electron ."
-
+    "start": "electron .",
+    "make": "electron-forge make",
+    "package": "electron-forge package"
   },
-
   "dependencies": {
-
     "electron-dl": "^4.0.0"
-
+  },
+  "forge": {
+    "packagerConfig": {
+      "osxSign": {},
+      "osxNotarize": {},
+      "extraResource": [
+        "extra"
+      ]
+    },
+    "makers": [
+      {
+        "name": "@electron-forge/maker-zip",
+        "platforms": [
+          "darwin"
+        ]
+      }
+    ]
   }
-
 }
-
