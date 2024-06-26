@@ -6,9 +6,6 @@
   "main": "main.js",
   "author": "Matyáš Hájek",
   "devDependencies": {
-    "@electron-forge/maker-dmg": "^7.4.0",
-    "@electron-forge/maker-zip": "^7.4.0",
-    "electron-prebuilt-compile": "31.1.0"
   },
   "scripts": {
     "start": "electron .",
