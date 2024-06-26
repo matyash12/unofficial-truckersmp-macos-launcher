@@ -44,6 +44,17 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
+function getWineCommandWithOverides(command_to_run){
+    const whole_command_to_run = "export WINEPREFIX="+'"'+winePrefix+'"' + " && " + 'export WINEDLLOVERRIDES="d3d11=n;d3d10core=n;dxgi=n;d3d9=n"' + " && "+'"'+winePath+'"' +" "+'"'+command_to_run +'"'
+    myConsole.log("Running command")
+    myConsole.log(whole_command_to_run)
+    exec(whole_command_to_run)
+    myConsole.log("After running a command")
+}
+function getSafePath(path){
+    return '"' +path+ '"';
+}
+
 
 
 ipcMain.on('install_steam', async (event) => {
@@ -70,22 +81,24 @@ ipcMain.on('install_steam', async (event) => {
     }
 });
 
-ipcMain.on('start_steam_installer', async (event) => {
-    myConsole.log("Starting steam installer")
-    const wholeCommand = 'export WINEPREFIX="'+winePrefix+'"' +" && "+ '"'+ winePath+'"' + " " + '"'+steamInstallerExeFile+'"'
 
-    myConsole.log(wholeCommand)
-    exec(wholeCommand);
+ipcMain.on('start_steam_installer', async (event) => {
+    //myConsole.log("Starting steam installer")
+    //const wholeCommand = 'export WINEPREFIX="'+winePrefix+'"' +" && "+ '"'+ winePath+'"' + " " + '"'+steamInstallerExeFile+'"'
+    getWineCommandWithOverides(steamInstallerExeFile)
+    //myConsole.log(wholeCommand)
+    //exec(wholeCommand);
 });
 
 
 ipcMain.on('start_steam',async (event) =>{
-    myConsole.log("Starting steam")
-    const wholeCommand = 'export WINEPREFIX="'+winePrefix+'"' +" && "+ '"'+ winePath + '"' + " " +'"'+ steamExeFile+'"'
-
-    myConsole.log(wholeCommand)
-    exec(wholeCommand);
+    //myConsole.log("Starting steam")
+    //const wholeCommand = 'export WINEPREFIX="'+winePrefix+'"' +" && "+ '"'+ winePath + '"' + " " +'"'+ steamExeFile+'"'
+    getWineCommandWithOverides(steamExeFile)
+    //myConsole.log(wholeCommand)
+    //exec(wholeCommand);
 });
+//export WINEDLLOVERRIDES="d3d11=n;d3d10core=n;dxgi=n;d3d9=n" 
 
 ipcMain.on('wine_kill_all', async (event) =>{
     myConsole.log("Running killall -9 wine")
@@ -98,3 +111,20 @@ ipcMain.on('wine_kill_all', async (event) =>{
 
     myConsole.log("Killed all wine and wine-preloader")
 });
+
+ipcMain.on('create_wine_enviroment',async (event) =>{
+    myConsole.log("Running wineboot")
+    const wholeCommand = 'export WINEPREFIX="'+winePrefix+'"' +" && "+ '"'+ winePath + '"' + " " + "wineboot"
+    myConsole.log(wholeCommand)
+    exec(wholeCommand);
+});
+
+
+ipcMain.on('move_wine_packages',async (event) =>{
+    myConsole.log("Moving wine packages")
+    const wholeCommand = "export WINEPREFIX="+getSafePath(winePrefix)+" && "+"cp "+getSafePath(basepath+"/packages/dxvk-2.3.1/x64/")+"*.dll" + " " + getSafePath("$WINEPREFIX/drive_c/windows/system32") + " && " + "cp " + getSafePath(basepath + "/packages/dxvk-2.3.1/x32/")+"*.dll" + " " + getSafePath("$WINEPREFIX/drive_c/windows/syswow64");
+    //const wholeCommand = 'export WINEPREFIX=" + " && "+ "cp "+basepath+"/packages/dxvk-2.3.1/x64/*.dll $WINEPREFIX/drive_c/windows/system32" + " && "+ "cp "+basepath+"/packages/dxvk-2.3.1/x32/*.dll $WINEPREFIX/drive_c/windows/syswow64"
+    myConsole.log(wholeCommand)
+    exec(wholeCommand);
+});
+
