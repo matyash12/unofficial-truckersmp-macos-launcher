@@ -1,0 +1,30 @@
+#compdef truckersmp-cli                           -*- shell-script -*-
+# zsh completion for truckersmp-cli
+
+__truckersmp_cli() {
+    typeset -A opt_args
+    local prev="${words[CURRENT-1]}"
+    local diropts="--gamedir|--moddir|--protondir|--steamruntimedir|--prefixdir|--native-steam-dir|--wine-steam-dir"
+    local fileopts="--configfile|--logfile"
+
+    if [[ "${prev}" =~ ${diropts} ]]; then
+        _path_files -/
+        return
+    elif [[ "${prev}" =~ ${fileopts} ]]; then
+        _path_files
+        return
+    fi
+
+    _arguments -s -S "1: :->action" "2: :->game" {-h,--help}"[show help message and exit]:" {-b,--beta}"[set game version to VERSION, useful for downgrading (e.g. \"temporary_1_35\")]" {-c,--configfile}"[use alternative configuration file \[Default: $XDG_CONFIG_HOME/truckersmp-cli/truckersmp-cli.conf\]]" --download-throttle"[limit download speed to SPEED (KiB/s), disabled if negative value is specified \[Default: -1\]]" {-f,--flatpak-steam}"[use Flatpak version of Steam with Proton Note: Currently Steam Runtime is not supported and will be disabled]" {-g,--gamedir}"[choose a different directory for the game files \[Default: $XDG_DATA_HOME/truckersmp-cli/(Game name)/data\]]" {-i,--proton-appid}"[choose a different AppID or version name (\"X.Y\" format) of Proton (Needs an update for changes) \[Default: 2348590\]]" {-l,--logfile}"[write log into LOG, \"-vv\" option is recommended \[Default: Empty string (only stderr)\] Note: Messages from Steam/SteamCMD won't be written, only from this script (Game logs are written into \"My Documents/{ETS2,ATS}MP/logs/client_*.log\")]" {-m,--moddir}"[choose a different directory for the mod files \[Default: $XDG_DATA_HOME/truckersmp-cli/TruckersMP\]]" {-n,--account}"[steam account name to use (This account should own the game and ideally is logged in with saved credentials)]" {-o,--protondir}"[choose a different Proton directory \[Default: $XDG_DATA_HOME/truckersmp-cli/Proton\] While updating any previous version in this folder gets changed to the given (-i) or default Proton version]" {-p,--proton}"[start the game with Proton \[Default on Linux if neither Proton or Wine are specified\]]" {-r,--rendering-backend}"[choose a rendering backend \[Default: auto (OpenGL is used when \"rendering-backend\" is not specified for the game in the configuration file)\]]" --steamruntimedir"[choose a different Steam Runtime directory for Proton 5.13 or newer \[Default: $XDG_DATA_HOME/truckersmp-cli/SteamRuntime\]]" {-v,--verbose}"[verbose output (none: error, once: info, twice or more: debug)]" {-w,--wine}"[start the game with Wine \[Default on systems other than linux if neither Proton or Wine are specified\]]" {-x,--prefixdir}"[choose a different directory for the prefix \[Default: $XDG_DATA_HOME/truckersmp-cli/(Game name)/prefix\]]" --activate-native-d3dcompiler-47"[Force activating native 64-bit d3dcompiler_47.dll for D3D11, when starting Note: No need to specify manually]" --check-windows-steam"[check for the Windows Steam version on updating when using Proton]" --disable-proton-overlay"[disable Steam Overlay when using Proton]" --disable-steamruntime"[don't use Steam Runtime even when using Proton 5.13 or newer]" --game-options"[specify ATS/ETS2 options \[Default: \"-nointro -64bit\"\] Note: If specifying only one option, use \"--game-options=-option\" format]" --native-steam-dir"[choose native Steam installation, useful only if your Steam directory is not detected automatically \[Default: \"auto\"\]]" --self-update"[update files to the latest release and quit Note: Python package users should use pip instead]" --skip-update-proton"[skip updating already-installed Proton and Steam Runtime when updating game with Proton enabled]" --use-wined3d"[use OpenGL-based D3D11 instead of DXVK when using Proton]" --wine-desktop"[use Wine desktop, work around resolution issue, mouse clicking won't work in other GUI apps while the game is running, SIZE must be 'WIDTHxHEIGHT' format (e.g. 1920x1080)]" --wine-steam-dir"[choose a directory for Windows version of Steam \[Default: \"C:\Program Files (x86)\Steam\" in the prefix\]]" --without-wine-discord-ipc-bridge"[don't use wine-discord-ipc-bridge for Discord Rich Presence]" --version"[print version information and quit]"
+
+    case "${state}" in
+        action)
+            _values action 'start[start game]' 'update[update/install latest game]' 'downgrade[downgrade game (install game from "temporary_X_Y" branch)]' 'updateandstart["update" and "start"]' 'ustart[same as "updateandstart" ("update" and "start")]' 'downgradeandstart["downgrade" and "start"]' 'dstart[same as "downgradeandstart" ("downgrade" and "start")]' 'kill[kill running processes in the same Wine prefix]'
+            ;;
+        game)
+            _values game 'ets2mp[ETS2 multiplayer]' 'ets2[ETS2 singleplayer]' 'atsmp[ATS multiplayer]' 'ats[ATS singleplayer]'
+            ;;
+    esac
+}
+
+__truckersmp_cli
