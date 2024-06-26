@@ -35,3 +35,7 @@ create_wine_enviroment.addEventListener('click', () =>{
 move_wine_packages.addEventListener('click', ()=>{
     ipcRenderer.send('move_wine_packages')
 });
+
+truckersmp_open_button.addEventListener('click', ()=>{
+    ipcRenderer.send('truckersmp_open_button')
+});
