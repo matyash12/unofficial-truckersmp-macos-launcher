@@ -12,11 +12,11 @@ var basepath = app.getAppPath();
 
 const { exec } = require('child_process');
 
-const winePath = basepath + "/windowsresources/wine/wine/Contents/Resources/wine/bin/wine"
-const steamInstallerExeFile = basepath + "/downloadfolder/SteamSetup.exe"
-const winePrefix = basepath + "/windowsresources/wine_prefix"
-const steamExeFile = basepath + "/windowsresources/wine_prefix/drive_c/Program Files (x86)/Steam/steam.exe"
-const truckersmp_cli_path = basepath + "/packages/truckersmp-cli-0.10.2.1/truckersmp-cli"
+const winePath = basepath + "/extra/windowsresources/wine/wine/Contents/Resources/wine/bin/wine"
+const steamInstallerExeFile = basepath + "/extra/downloadfolder/SteamSetup.exe"
+const winePrefix = basepath + "/extra/windowsresources/wine_prefix"
+const steamExeFile = basepath + "/extra/windowsresources/wine_prefix/drive_c/Program Files (x86)/Steam/steam.exe"
+const truckersmp_cli_path = basepath + "/extra/packages/truckersmp-cli-0.10.2.1/truckersmp-cli"
 const ets2_path = winePrefix + "/drive_c/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2"
 //const {download,CancelError} = require("electron-dl");
 
@@ -70,7 +70,7 @@ function getSafePath(path) {
 ipcMain.on('install_steam', async (event) => {
     myConsole.log("Install steam server")
     const downloadUrl = 'https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe';
-    const saveDirectory = basepath + '/downloadfolder'
+    const saveDirectory = basepath + '/extra/downloadfolder'
     const saveFilename = 'SteamSetup.exe'
     //const command = "curl " + url + " --output SteamSetup.exe";
 
