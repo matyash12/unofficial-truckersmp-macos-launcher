@@ -6,13 +6,13 @@
   "main": "main.js",
   "author": "Matyáš Hájek",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "make": "electron-forge make",
     "package": "electron-forge package"
   },
   "dependencies": {
-    "electron": "^31.1.0",
-    "electron-dl": "^4.0.0"
+    "electron-dl": "^4.0.0",
+    "electron-squirrel-startup": "^1.0.1"
   },
   "forge": {
     "packagerConfig": {
@@ -30,5 +30,16 @@
         ]
       }
     ]
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^31.1.0"
   }
 }
