@@ -5,14 +5,13 @@
   "description": "Hello World!",
   "main": "main.js",
   "author": "Matyáš Hájek",
-  "devDependencies": {
-  },
   "scripts": {
     "start": "electron .",
     "make": "electron-forge make",
     "package": "electron-forge package"
   },
   "dependencies": {
+    "electron": "^31.1.0",
     "electron-dl": "^4.0.0"
   },
   "forge": {
