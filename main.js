@@ -69,7 +69,7 @@ function getSafePath(path) {
 
 ipcMain.on('install_steam', async (event) => {
     myConsole.log("Install steam server")
-    const downloadUrl = 'https://unpkg.com/mvp.css@1.15.0/mvp.css';
+    const downloadUrl = 'https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe';
     const saveDirectory = basepath + '/downloadfolder'
     const saveFilename = 'SteamSetup.exe'
     //const command = "curl " + url + " --output SteamSetup.exe";
