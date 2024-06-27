@@ -5,3 +5,5 @@ venv/
 
 out/
 dist/
+app.log
+Resources/downloadfolder/SteamSetup.exe

@@ -6,26 +6,45 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>TruckersMP MacOS installer</title>
+    <title>Unofficial MacOS TruckersMP pre-launcher</title>
 </head>
 
 <body>
-    <h1>TruckersMP MacOS installer</h1>
-    
-    <button id="steam_install_button">Click to install steam</button>
-    <button id="steam_installer_open_button">Click to open Steam Installer</button>
-    <button id="steam_open_button">Click to open Steam</button>
-    
+    <h1>Unofficial MacOS TruckersMP pre-launcher</h1>
+    <code>Version 1.0.2</code>
+
+
+    <br>
+    <button id="easy_install_button">Click to install Wine, Steam and other packages</button>
+    <button id="easy_open_steam_button" disabled>Click to open Steam</button>
+    <button id="easy_open_truckersmp_button" disabled>Click to open TruckersMP launcher</button>
+    <button id="wine_kill_all">Click to kill all wine processes</button>
     
 
-    <button id="wine_kill_all">Click to kill all wine</button>
-    <button id="create_wine_enviroment">Click to create wine enviroment</button>
-    <button id="move_wine_packages">Move wine packages</button>
-    
-    <button id="truckersmp_open_button">Click to open TruckersMP</button>
+
+    <br></br>
+    <button id="open_advanced">Open advanced</button>
+    <button id="close_advanced">Close advanced</button>
+
+
+    <div id="advanced_div" hidden>
+        <h2>Advanced options</h2>
+        <h3>Use this only if you know what you are doing!</h3>
+        <button id="steam_install_button">Click to install steam</button>
+        <button id="steam_installer_open_button">Click to open Steam Installer</button>
+        <button id="steam_open_button">Click to open Steam</button>
+
+
+
+        <button id="wine_kill_all">Click to kill all wine</button>
+        <button id="create_wine_enviroment">Click to create wine enviroment</button>
+        <button id="move_wine_packages">Move wine packages</button>
+
+        <button id="truckersmp_open_button">Click to open TruckersMP</button>
+    </div>
+
 
     <script src="renderer.js"></script>
-
 </body>
 
 </html>
