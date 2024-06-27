@@ -15,5 +15,6 @@ This is a way to play TruckersMP on mac's.
 ## Features
 - Automatic installation and setup
 
-# Disclaimer
+## Disclaimer
 THIS IS NOT A OFFICIAL LAUNCHER FOR TRUCKERSMP
+USE AT YOUR OWN RISK!
