@@ -80,7 +80,7 @@ ipcRenderer.on('other_easy_buttons_allowed', (event, data) => {
         easy_open_steam_button.disabled = false;
         easy_open_truckersmp_button.disabled = false;
     }else{
-        easy_install_button.disabled = true
+        easy_install_button.disabled = false;
         easy_open_steam_button.disabled = true;
         easy_open_truckersmp_button.disabled = true;
     }

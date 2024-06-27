@@ -1,8 +1,8 @@
 {
-  "name": "my-electron-app",
+  "name": "launcher",
   "version": "1.0.0",
   "type": "module",
-  "description": "Hello World!",
+  "description": "Simple way to run Truckersmp on Mac OS",
   "main": "main.js",
   "author": "Matyáš Hájek",
   "scripts": {

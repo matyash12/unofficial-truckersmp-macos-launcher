@@ -9,8 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const { Console } = require('console');
 
-//var basepath = path.join(app.getAppPath() + "/..").toString(); //production
-var basepath = path.join(app.getAppPath() + "/Resources").toString(); //devel
+var basepath = path.join(app.getAppPath() + "/..").toString(); //production
+//var basepath = path.join(app.getAppPath() + "/Resources").toString(); //devel
 
 // Create a writable stream
 const logStream = fs.createWriteStream(path.join(basepath, 'app.log'), { flags: 'a' });
@@ -67,9 +67,8 @@ app.whenReady().then(() => {
 
 
     async function checkSteamInstallation() {
-        await waitOneSecond()
-        while (!check_if_steam_installed()) {
-            myConsole.log("Steam is not yet installed. Waiting one second before trying again.");
+        while (check_if_steam_installed() == false){
+            myConsole.log("Autochecker steam is still not installed")
             await waitOneSecond();
         }
     }
