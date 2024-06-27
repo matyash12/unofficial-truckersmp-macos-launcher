@@ -5,3 +5,7 @@ Open Steam
 Open TruckersMP
 LOGS! and easy to share
 Make it non-reverse engineer
+Icons
+
+
+electron-builder --mac --x64 

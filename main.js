@@ -5,19 +5,35 @@ const require = createRequire(import.meta.url);
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 
-var nodeConsole = require('console');
-var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
+const fs = require('fs');
+const path = require('path');
+const { Console } = require('console');
 
-var basepath = app.getAppPath();
+var basepath = path.join(app.getAppPath() + "/..").toString();
+// Create a writable stream
+const logStream = fs.createWriteStream(path.join(basepath, 'app.log'), { flags: 'a' });
+
+// Create a new console instance
+const fileConsole = new Console({ stdout: logStream, stderr: logStream });
+
+// Example usage
+fileConsole.log('This is a message logged to the file.');
+fileConsole.error('This is an error logged to the file.');
+
+var myConsole = fileConsole;
+//var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
+
+
 
 const { exec } = require('child_process');
 
-const winePath = basepath + "/extra/windowsresources/wine/wine/Contents/Resources/wine/bin/wine"
-const steamInstallerExeFile = basepath + "/extra/downloadfolder/SteamSetup.exe"
-const winePrefix = basepath + "/extra/windowsresources/wine_prefix"
-const steamExeFile = basepath + "/extra/windowsresources/wine_prefix/drive_c/Program Files (x86)/Steam/steam.exe"
-const truckersmp_cli_path = basepath + "/extra/packages/truckersmp-cli-0.10.2.1/truckersmp-cli"
+const winePath = basepath + "/windowsresources/wine/wine/Contents/Resources/wine/bin/wine"
+const steamInstallerExeFile = basepath + "/downloadfolder/SteamSetup.exe"
+const winePrefix = basepath + "/windowsresources/wine_prefix"
+const steamExeFile = basepath + "/windowsresources/wine_prefix/drive_c/Program Files (x86)/Steam/steam.exe"
+const truckersmp_cli_path = basepath + "/packages/truckersmp-cli-0.10.2.1/truckersmp-cli"
 const ets2_path = winePrefix + "/drive_c/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2"
+const steamSaveDirectoryDownload = basepath + '/downloadfolder'
 //const {download,CancelError} = require("electron-dl");
 
 import { download, CancelError } from 'electron-dl';
@@ -73,7 +89,7 @@ function getSafePath(path) {
 ipcMain.on('install_steam', async (event) => {
     myConsole.log("Install steam server")
     const downloadUrl = 'https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe';
-    const saveDirectory = basepath + '/extra/downloadfolder'
+    
     const saveFilename = 'SteamSetup.exe'
     //const command = "curl " + url + " --output SteamSetup.exe";
 
@@ -81,7 +97,7 @@ ipcMain.on('install_steam', async (event) => {
     myConsole.log("After win")
     try {
         myConsole.log("Before download")
-        myConsole.log(await download(win, downloadUrl, { directory: saveDirectory, filename: saveFilename }));
+        myConsole.log(await download(win, downloadUrl, { directory: steamSaveDirectoryDownload, filename: saveFilename }));
         myConsole.log("After downloda")
 
     } catch (error) {
