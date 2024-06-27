@@ -18,5 +18,5 @@ This is a way to play TruckersMP on mac's.
 eg. todo I will add this later
 
 ## Disclaimer
-THIS IS NOT A OFFICIAL LAUNCHER FOR TRUCKERSMP
-USE AT YOUR OWN RISK!
+- THIS IS NOT A OFFICIAL LAUNCHER FOR TRUCKERSMP
+- USE AT YOUR OWN RISK!
