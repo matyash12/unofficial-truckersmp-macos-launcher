@@ -2,6 +2,7 @@
 This is a way to play TruckersMP on mac's. 
 
 ## How to install?
+- Download release and then follow app instructions
 
 
 ## Known issues
