@@ -27,7 +27,7 @@ easy_open_steam_button.addEventListener('click', () => {
     ipcRenderer.send('start_steam');
 });
 easy_open_truckersmp_button.addEventListener('click', () => {
-    ipcRenderer.send('install_steam');
+    ipcRenderer.send('truckersmp_open_button');
 });
 
 
