@@ -1,6 +1,9 @@
 # Unofficial TruckersMP launcher for MacOs
 This is a way to play TruckersMP on mac's. 
 
+## How to install?
+
+
 ## What it uses
 - Wine 9.11
 - TruckersMP
