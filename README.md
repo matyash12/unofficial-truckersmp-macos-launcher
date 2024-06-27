@@ -4,16 +4,18 @@ This is a way to play TruckersMP on mac's.
 ## How to install?
 
 
-## What it uses
-- Wine 9.11
-- TruckersMP
-
 ## Known issues
 - Game crashes when you press 'esc' while driving. (use "m" and then click home)
 - Text chat sometimes becomes unusable
 
-## Features
-- Automatic installation and setup
+## What it uses
+- Wine 9.11
+- truckersmp-cli (https://github.com/truckersmp-cli/truckersmp-cli)
+- DXVK (https://github.com/doitsujin/dxvk)
+- Electron
+
+## Developer (how to build?)
+eg. todo I will add this later
 
 ## Disclaimer
 THIS IS NOT A OFFICIAL LAUNCHER FOR TRUCKERSMP
