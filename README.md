@@ -3,7 +3,7 @@ This is a way to play TruckersMP on mac's.
 
 
 ## How to install?
-- Download release and then follow app instructions
+- Download release ([here](https://github.com/matyash12/unofficial-truckersmp-macos-launcher/releases)) and then follow app instructions
 
 
 ## Known issues
