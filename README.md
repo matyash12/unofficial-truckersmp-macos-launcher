@@ -1,5 +1,5 @@
 # Unofficial TruckersMP launcher for MacOs
-This is a way to play TruckersMP on mac's. 
+This is a way to play TruckersMP on mac's. (tested on Apple Silicon mac, but should run even on Intel macs)
 
 
 ## How to install?
