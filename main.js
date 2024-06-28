@@ -9,8 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const { Console } = require('console');
 
-//var basepath = path.join(app.getAppPath() + "/..").toString(); //production
-var basepath = path.join(app.getAppPath() + "/Resources").toString(); //devel
+var basepath = path.join(app.getAppPath() + "/..").toString(); //production
+//var basepath = path.join(app.getAppPath() + "/Resources").toString(); //devel
 
 // Create a writable stream
 const logStream = fs.createWriteStream(path.join(basepath, 'app.log'), { flags: 'a' });
@@ -39,7 +39,7 @@ const steamSaveDirectoryDownload = basepath + '/downloadfolder'
 //const {download,CancelError} = require("electron-dl");
 
 import { download, CancelError } from 'electron-dl';
-
+const maxBuffer = 1024 * 1024; //1 mb buffer
 
 var win = null
 
@@ -67,9 +67,9 @@ app.whenReady().then(() => {
 
 
     async function checkSteamInstallation() {
-        while (true){
+        while (true) {
             await waitOneSecond();
-            check_if_steam_installed() 
+            check_if_steam_installed()
             myConsole.log("Autochecking if steam is installed")
             await waitOneSecond();
             await waitOneSecond();
@@ -78,7 +78,7 @@ app.whenReady().then(() => {
     }
     myConsole.log("HERE!")
     checkSteamInstallation();
-    
+
 })
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
@@ -88,14 +88,32 @@ function getWineCommandWithOverides(command_to_run) {
     const whole_command_to_run = "export WINEPREFIX=" + '"' + winePrefix + '"' + " && " + 'export WINEDLLOVERRIDES="d3d11=n;d3d10core=n;dxgi=n;d3d9=n"' + " && " + '"' + winePath + '"' + " " + '"' + command_to_run + '"'
     myConsole.log("Running command")
     myConsole.log(whole_command_to_run)
-    exec(whole_command_to_run)
+    exec(whole_command_to_run, { maxBuffer }, (err, stdout, stderr) => {
+        if (err) {
+            // Handle error
+            myConsole.error(err);
+        }
+
+        // Handle stdout and stderr
+        myConsole.log(`stdout: ${stdout}`);
+        myConsole.error(`stderr: ${stderr}`);
+    });
     myConsole.log("After running a command")
 }
 
 function runCommandWithExports(command_to_run) {
-    const whole_command_to_run = "export WINEPREFIX=" + '"' + winePrefix + '"' + " && " + 'export WINEDLLOVERRIDES="d3d11=n;d3d10core=n;dxgi=n;d3d9=n" ' + " && " + command_to_run
+    const whole_command_to_run = "export WINE="+winePath+" && export WINEPREFIX=" + '"' + winePrefix + '"' + " && " + 'export WINEDLLOVERRIDES="d3d11=n;d3d10core=n;dxgi=n;d3d9=n" ' + " && " + command_to_run
     myConsole.log(whole_command_to_run)
-    exec(whole_command_to_run)
+    exec(whole_command_to_run, { maxBuffer }, (err, stdout, stderr) => {
+        if (err) {
+            // Handle error
+            myConsole.error(err);
+        }
+
+        // Handle stdout and stderr
+        myConsole.log(`stdout: ${stdout}`);
+        myConsole.error(`stderr: ${stderr}`);
+    });
     myConsole.log("After running a command")
 }
 
@@ -268,11 +286,11 @@ ipcMain.on('easy_install', async (event) => {
     await start_steam_installer();
 
     myConsole.log("Check if installed")
-    while (check_if_steam_installed() == false){
+    while (check_if_steam_installed() == false) {
         myConsole.log("Steam is not yet installed waiting one second before trying again.")
         await waitOneSecond();
     }
-    
+
 
     myConsole.log("Easy install Finished!")
 });
