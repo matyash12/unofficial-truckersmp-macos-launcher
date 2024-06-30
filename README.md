@@ -17,9 +17,6 @@ This is a way to play TruckersMP on mac's. (tested on Apple Silicon mac, but sho
 - DXVK (https://github.com/doitsujin/dxvk)
 - Electron
 
-## Developer (how to build?)
-eg. todo I will add this later
-
 ## Disclaimer
 - THIS IS NOT A OFFICIAL LAUNCHER FOR TRUCKERSMP
 - USE AT YOUR OWN RISK!
