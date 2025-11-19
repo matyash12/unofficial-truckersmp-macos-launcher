@@ -1,4 +1,9 @@
-# Unofficial TruckersMP launcher for MacOs
+# Unofficial TruckersMP launcher for MacO
+
+NOT MAINTAINED ANYMORE! 
+Sorry everyone, but I stopped playing ets2 and I dont have energy or time to take of this.
+If anyone finds way to fix it they can submit a PR.
+
 This is a way to play TruckersMP on mac's. (tested on Apple Silicon mac, but should run even on Intel macs)
 
 ![Example image](https://github.com/matyash12/unofficial-truckersmp-macos-launcher/blob/dd70495dc354f81f8b6a260f46b573e2651e5d6a/ShowTruckersmp_mac.png)
